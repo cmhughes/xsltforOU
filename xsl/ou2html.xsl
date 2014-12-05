@@ -31,8 +31,11 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- language settings -->
 <xsl:import href="./languages/mathbook-language-en.xsl" />
 
-<!-- cross references -->
+<!-- 
+     cross references 
 <xsl:import href="../crossrefs.xsl" />
+-->
+<xsl:import href="CrossRefs.xsl" />
 
 <!-- Intend output for rendering by a web browser -->
 <xsl:output method="xml" encoding="utf-8"/>
@@ -69,27 +72,75 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 
 <!-- update cross reference auxilary file -->
 <xsl:template match="*" name="set-up-auxilary-file">
-  <!-- out put auxilary data to its own xml file -->
-  <exsl:document href="CrossRefs.xml" method="xml" indent="yes">
-    <xsl:element name="body">
-    <!-- loop through each cross reference -->
-    <!-- <xsl:for-each select="./section/cref"> -->
-      <xsl:for-each select="./section/*/@xml:id">
-        <!-- create an xml element named crossref ... -->
-        <xsl:element name="crossref">
-          <!-- ... that has id="xml:id" ... -->
-          <xsl:attribute name="id"><xsl:value-of select="current()"/></xsl:attribute>
-          <!-- ... and the cref contains the bit we want, e.g Figure 1, Table 3, etc -->
-          <xsl:attribute name="cref">
-            <xsl:apply-templates select=".." mode="type-name"/>
-            <xsl:text> </xsl:text>
-            <xsl:apply-templates select=".." mode="number"/>
-          </xsl:attribute>
-        </xsl:element>
-      </xsl:for-each>
-    </xsl:element>
-  </exsl:document>
+  <!-- out put auxilary data to its own xml file 
+       This template essentially creates an xsl file that looks something like the following:
+<xsl:template name="cross-reference">
+    <xsl:param name="cref" />
+    <xsl:choose>
+        <xsl:when test="$cref='figure-function-derivative'">        <xsl:text>Figure 1.1</xsl:text></xsl:when>
+        <xsl:when test="$cref='tab-firsttablereference'">        <xsl:text>Table 3.2</xsl:text></xsl:when>
+        <xsl:otherwise>
+            <xsl:message terminate="no">Warning: <xsl:value-of select="$cref" /> cross reference not found.&#xa;</xsl:message>
+        <xsl:text>???</xsl:text>
+        </xsl:otherwise>
+    </xsl:choose>
 </xsl:template>
+  -->
+  <exsl:document href="CrossRefs.xsl" method="xml" indent="yes">
+    <xsl:comment>*                                    *</xsl:comment>
+    <xsl:comment>* Generated from MathBook XML source *</xsl:comment>
+    <xsl:comment>
+      <xsl:text>*    on </xsl:text>
+      <xsl:value-of select="date:date-time()" />
+      <xsl:text>    *</xsl:text>
+    </xsl:comment>
+    <xsl:comment>*                                    *</xsl:comment><xsl:text>&#xa;</xsl:text>
+    <!-- create an xsl stylesheet ... -->
+    <xsl:element name="xsl:stylesheet">
+    <!-- set the version -->
+        <xsl:attribute name="version">1.0</xsl:attribute>
+      <!-- xsl output method -->
+      <xsl:element name="xsl:output">
+        <xsl:attribute name="method">text</xsl:attribute>
+      </xsl:element>
+      <!-- create an xsl template -->
+      <xsl:element name="xsl:template">
+      <!-- set the name -->
+          <xsl:attribute name="name">cross-reference</xsl:attribute>
+        <!-- create an xsl param -->
+        <xsl:element name="xsl:param">
+          <xsl:attribute name="name">cref</xsl:attribute>
+        </xsl:element>
+        <!-- create an xsl choose -->
+        <xsl:element name="xsl:choose">
+          <!-- loop through each cross reference -->
+          <!-- <xsl:for-each select="./section/cref"> -->
+            <xsl:for-each select="./section/*/@xml:id">
+              <!-- set up the bit that has <xsl:when test='figure-description'><xsl:text>Figure 1.3</xsl:text></xsl:when> -->
+              <xsl:element name="xsl:when">
+                <!-- ... this is the test='...' bit ... -->
+                <xsl:attribute name="test"><xsl:text>$cref='</xsl:text><xsl:value-of select="current()"/><xsl:text>'</xsl:text></xsl:attribute>
+                <!-- ... and the cref contains the bit we want, e.g Figure 1, Table 3, etc -->
+                  <xsl:apply-templates select=".." mode="type-name"/>
+                  <xsl:text> </xsl:text>
+                  <xsl:apply-templates select=".." mode="number"/>
+              </xsl:element>
+            </xsl:for-each>
+            <!-- set-up otherwise part -->
+              <xsl:element name="xsl:otherwise">
+                <xsl:element name="xsl:message"> 
+                  <xsl:attribute name="terminate">no</xsl:attribute>
+                  Warning
+                  <xsl:element name="xsl:value-of"><xsl:attribute name="select">$cref</xsl:attribute></xsl:element>
+                  cross reference not found. 
+                  <xsl:element name="xsl:text">???</xsl:element>
+                </xsl:element>
+              </xsl:element>
+          </xsl:element>
+        </xsl:element>
+      </xsl:element>
+    </exsl:document>
+  </xsl:template>
 
 <!-- create chapters -->
 <xsl:template match="chapter">
@@ -107,6 +158,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </xsl:element>
   </xsl:element>
 </xsl:template>
+
 
 <!-- sections simply need a div -->
 <xsl:template match="section">
@@ -157,17 +209,4 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </xsl:element>
   </xsl:template>
 
-
 </xsl:stylesheet>
-<!--
-  <xsl:element name="cref">
-    <xsl:choose>
-      <xsl:when test="@object">
-    <xsl:attribute name="object"><xsl:value-of select="@object" /></xsl:attribute>
-      </xsl:when>
-      <xsl:otherwise>
-    <xsl:attribute name="object">???</xsl:attribute>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:element>
--->
