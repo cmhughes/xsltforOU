@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<body>
+  <crossref id="figure-function-derivative" cref="Figure 1"/>
+  <crossref id="tab-firsttablereference" cref="Table 1"/>
+  <crossref id="tab-anotherservice" cref="Table 2"/>
+  <crossref id="figure-function-derivativecm" cref="Figure 1"/>
+  <crossref id="cmh" cref="Figure 2"/>
+</body>

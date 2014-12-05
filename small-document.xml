@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+% !arara: xslt: {convertTo: tex, outputToFile: no}
+% arara: xslt: {convertTo: html, outputToFile: no}
+-->
+
+<chapter>
+  <section>
+    <figure xml:id="figure-function-derivative">
+      figure code goes here
+      <caption>A function and its derivative</caption>
+    </figure>
+
+    <figure>
+      figure code goes here
+      <caption>A function and its derivative</caption>
+    </figure>
+
+    <table xml:id="tab-firsttablereference">
+      table code goes here
+      <caption>tables are awesome</caption>
+    </table>
+
+    <table xml:id="tab-anotherservice">
+      table code goes here
+      <caption>tables are awesome</caption>
+    </table>
+  </section>
+  <section>
+    <figure xml:id="figure-function-derivativecm">
+      figure code goes here
+      <caption>A function and its derivative</caption>
+    </figure>
+
+    <figure xml:id="cmh">
+      figure code goes here
+      <caption>A function and its derivative</caption>
+    </figure>
+
+
+    have a look at <cref object="figure-function-derivative"/>
+
+
+    here's another reference: <cref object="tab-firsttablereference"/>
+
+    here's another reference: <cref object="cat"/>
+  </section>
+</chapter>

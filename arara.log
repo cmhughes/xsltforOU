@@ -1,0 +1,16 @@
+04 Dec 2014 20:58:45.094 INFO  Arara - Welcome to arara!
+04 Dec 2014 20:58:45.098 INFO  Arara - Processing file 'small-document.xml', please wait.
+04 Dec 2014 20:58:45.099 INFO  DirectiveExtractor - Reading directives from small-document.xml.
+04 Dec 2014 20:58:45.100 TRACE DirectiveExtractor - Directive found in line 4 with xslt: {convertTo: html, outputToFile: no}.
+04 Dec 2014 20:58:45.108 INFO  DirectiveParser - Parsing directives.
+04 Dec 2014 20:58:45.111 INFO  TaskDeployer - Deploying tasks into commands.
+04 Dec 2014 20:58:45.111 TRACE TaskDeployer - Task 'xslt' found in '/home/cmhughes/Documents/yamlfiles'.
+04 Dec 2014 20:58:45.341 INFO  CommandTrigger - Ready to run commands.
+04 Dec 2014 20:58:45.341 INFO  CommandTrigger - Running 'XSLTproc'.
+04 Dec 2014 20:58:45.341 TRACE CommandTrigger - Command: xsltproc  ./xsl/omd2html.xsl small-document.xml
+04 Dec 2014 20:58:45.487 TRACE CommandTrigger - Output logging:
+04 Dec 2014 20:58:45.488 TRACE CommandTrigger - warning: failed to load external entity "./xsl/omd2html.xsl"
+cannot parse ./xsl/omd2html.xsl
+
+04 Dec 2014 20:58:45.488 WARN  CommandTrigger - 'XSLTproc' returned an error status.
+04 Dec 2014 20:58:45.488 INFO  Arara - Done.
