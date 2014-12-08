@@ -38,7 +38,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <xsl:import href="CrossRefs.xsl" />
 
 <!-- Intend output for rendering by a web browser -->
-<xsl:output method="xml" encoding="utf-8"/>
+<xsl:output method="html" encoding="utf-8" indent="yes"/>
 
 <!-- numbered figures -->
 <xsl:template match="figure" mode="number">

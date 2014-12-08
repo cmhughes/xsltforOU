@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--*                                    *-->
 <!--* Generated from MathBook XML source *-->
-<!--*    on 2014-12-06T12:42:16Z    *-->
+<!--*    on 2014-12-08T19:19:18Z    *-->
 <!--*                                    *-->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
@@ -14,6 +14,7 @@
       <xsl:when test="$cref='tab-anotherservice'">Table 4</xsl:when>
       <xsl:when test="$cref='figure-function-derivativecm'">Figure 1</xsl:when>
       <xsl:when test="$cref='cmh'">Figure 2</xsl:when>
+      <xsl:when test="$cref='tab-anotherservice'">Table 1</xsl:when>
       <xsl:otherwise>
         <xsl:message terminate="no">
                   Warning

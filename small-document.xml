@@ -6,6 +6,10 @@
 
 <chapter>
   <section>
+ <figure>
+      figure code goes here
+      <caption>A function and its derivative</caption>
+    </figure>
     <figure>
       figure code goes here
       <caption>A function and its derivative</caption>
@@ -53,6 +57,11 @@
       figure code goes here
       <caption>A function and its derivative</caption>
     </figure>
+
+    <table xml:id="tab-anotherservice">
+      table code goes here
+      <caption>tables are awesome</caption>
+    </table>
 
 
     have a look at <cref object="figure-function-derivative"/>
